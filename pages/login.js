@@ -18,7 +18,7 @@ export default function LoginPage() {
       body: JSON.stringify({ pin }),
     });
     if (res.ok) {
-      router.push('/');
+      window.location.href = '/';
     } else {
       setError('Wrong PIN. Try again.');
     }
