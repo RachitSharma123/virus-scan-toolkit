@@ -2,6 +2,8 @@ import Hero from '../components/Hero';
 import MemoryCard from '../components/MemoryCard';
 import TimelineItem from '../components/TimelineItem';
 import BucketListCard from '../components/BucketListCard';
+import OnThisDay from '../components/OnThisDay';
+import StatsRow from '../components/StatsRow';
 import Link from 'next/link';
 
 export async function getServerSideProps() {
@@ -37,6 +39,8 @@ export default function Home({ memories, diaryCount, bucketPreview, timelinePrev
   return (
     <>
       <Hero />
+      <StatsRow memories={memories} />
+      <OnThisDay memories={memories} />
       <section className="container py-12">
         <h2 className="text-2xl font-script text-dark mb-6 text-center">Latest Memories</h2>
         {latest.length > 0 ? (
