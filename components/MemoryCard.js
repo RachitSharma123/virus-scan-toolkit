@@ -1,55 +1,58 @@
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
-import MoodChip from './MoodChip';
 
-/**
- * A card representing a single memory in the gallery. Displays the cover image, summary
- * details and allows favouriting via a heart icon.
- *
- * @param {Object} props
- * @param {Object} props.memory - Memory data object
- * @param {Function} props.onToggleFavourite - Callback to toggle favourite status
- */
 export default function MemoryCard({ memory, onToggleFavourite }) {
+  const dateStr = memory.date
+    ? new Date(memory.date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })
+    : '';
+
   return (
-    <div className="relative bg-white rounded-lg overflow-hidden shadow-soft hover:shadow-lg transition-shadow">
-      <div className="relative h-48 w-full">
-        <Image
-          src={memory.cover}
-          alt={memory.title}
-          fill
-          className="object-cover"
-        />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            onToggleFavourite(memory.id);
-          }}
-          aria-label="Toggle favourite"
-          className="absolute top-2 right-2 z-10 p-1 rounded-full bg-white/70 hover:bg-white"
-        >
-          <Heart
-            className={`w-5 h-5 ${memory.favourite ? 'text-rose' : 'text-gray-400'}`}
-            fill={memory.favourite ? '#FADADD' : 'none'}
+    <div className="bg-card rounded-[18px] overflow-hidden shadow-card hover:shadow-soft transition-shadow">
+      {memory.cover && (
+        <div className="relative h-44 w-full">
+          <Image
+            src={memory.cover}
+            alt={memory.title || 'Memory'}
+            fill
+            className="object-cover"
           />
-        </button>
-      </div>
-      <div className="p-4 space-y-2">
-        <h3 className="text-lg font-semibold text-dark truncate" title={memory.title}>{memory.title}</h3>
-        <p className="text-sm text-gray-500">{new Date(memory.date).toLocaleDateString()}</p>
-        <p className="text-sm text-gray-500 italic">{memory.location}</p>
-        <p className="text-sm text-gray-600 line-clamp-2">{memory.caption}</p>
-        <div className="flex flex-wrap gap-2 pt-2">
-          <MoodChip mood={memory.mood} />
-          {memory.tags.map((tag) => (
-            <span
-              key={tag}
-              className="bg-lavender/50 text-gray-700 text-xs px-2 py-1 rounded-full"
+          {onToggleFavourite && (
+            <button
+              onClick={(e) => { e.preventDefault(); onToggleFavourite(memory.id); }}
+              aria-label="Toggle favourite"
+              className="absolute top-2.5 right-2.5 z-10 p-1.5 rounded-full bg-cream/80 backdrop-blur-sm"
             >
-              #{tag}
-            </span>
-          ))}
+              <Heart
+                className={`w-4 h-4 ${memory.favourite ? 'text-accent' : 'text-mute'}`}
+                fill={memory.favourite ? '#b04a4a' : 'none'}
+              />
+            </button>
+          )}
         </div>
+      )}
+      <div className="p-4 space-y-1.5">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="serif text-base text-ink leading-snug truncate">{memory.title}</h3>
+          {!memory.cover && onToggleFavourite && (
+            <button onClick={(e) => { e.preventDefault(); onToggleFavourite(memory.id); }} className="flex-shrink-0">
+              <Heart
+                className={`w-4 h-4 ${memory.favourite ? 'text-accent' : 'text-mute'}`}
+                fill={memory.favourite ? '#b04a4a' : 'none'}
+              />
+            </button>
+          )}
+        </div>
+        <p className="mono text-xs text-mute">{dateStr}{memory.location ? ` · ${memory.location}` : ''}</p>
+        {memory.caption && (
+          <p className="text-sm text-ink-soft line-clamp-2 mt-1">{memory.caption}</p>
+        )}
+        {memory.tags?.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {memory.tags.map((tag) => (
+              <span key={tag} className="mood-chip text-xs">#{tag}</span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
