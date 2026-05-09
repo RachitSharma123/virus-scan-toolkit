@@ -67,10 +67,10 @@ a:hover { color: #8a3a3a; }
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 999px;
   background: #f6ecd9;
   color: #5a4a3e;
-  font-size: 13px;
+  font-size: 14px;
   font-family: 'Geist', sans-serif;
 }

@@ -7,9 +7,9 @@ export default function MemoryCard({ memory, onToggleFavourite }) {
     : '';
 
   return (
-    <div className="bg-card rounded-[18px] overflow-hidden shadow-card hover:shadow-soft transition-shadow">
+    <div className="bg-card rounded-[22px] overflow-hidden shadow-card hover:shadow-soft transition-shadow">
       {memory.cover && (
-        <div className="relative h-44 w-full">
+        <div className="relative h-56 w-full">
           <Image
             src={memory.cover}
             alt={memory.title || 'Memory'}
@@ -20,36 +20,36 @@ export default function MemoryCard({ memory, onToggleFavourite }) {
             <button
               onClick={(e) => { e.preventDefault(); onToggleFavourite(memory.id); }}
               aria-label="Toggle favourite"
-              className="absolute top-2.5 right-2.5 z-10 p-1.5 rounded-full bg-cream/80 backdrop-blur-sm"
+              className="absolute top-3 right-3 z-10 p-2 rounded-full bg-cream/80 backdrop-blur-sm"
             >
               <Heart
-                className={`w-4 h-4 ${memory.favourite ? 'text-accent' : 'text-mute'}`}
+                className={`w-5 h-5 ${memory.favourite ? 'text-accent' : 'text-mute'}`}
                 fill={memory.favourite ? '#b04a4a' : 'none'}
               />
             </button>
           )}
         </div>
       )}
-      <div className="p-4 space-y-1.5">
+      <div className="p-5 space-y-2">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="serif text-base text-ink leading-snug truncate">{memory.title}</h3>
+          <h3 className="serif text-lg text-ink leading-snug">{memory.title}</h3>
           {!memory.cover && onToggleFavourite && (
-            <button onClick={(e) => { e.preventDefault(); onToggleFavourite(memory.id); }} className="flex-shrink-0">
+            <button onClick={(e) => { e.preventDefault(); onToggleFavourite(memory.id); }} className="flex-shrink-0 p-1">
               <Heart
-                className={`w-4 h-4 ${memory.favourite ? 'text-accent' : 'text-mute'}`}
+                className={`w-5 h-5 ${memory.favourite ? 'text-accent' : 'text-mute'}`}
                 fill={memory.favourite ? '#b04a4a' : 'none'}
               />
             </button>
           )}
         </div>
-        <p className="mono text-xs text-mute">{dateStr}{memory.location ? ` · ${memory.location}` : ''}</p>
+        <p className="mono text-sm text-mute">{dateStr}{memory.location ? ` · ${memory.location}` : ''}</p>
         {memory.caption && (
-          <p className="text-sm text-ink-soft line-clamp-2 mt-1">{memory.caption}</p>
+          <p className="text-base text-ink-soft line-clamp-2">{memory.caption}</p>
         )}
         {memory.tags?.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
+          <div className="flex flex-wrap gap-2 pt-1">
             {memory.tags.map((tag) => (
-              <span key={tag} className="mood-chip text-xs">#{tag}</span>
+              <span key={tag} className="mood-chip">#{tag}</span>
             ))}
           </div>
         )}

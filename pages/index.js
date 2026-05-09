@@ -59,31 +59,31 @@ export default function Home({ memories, diaryCount, bucketPreview, timelinePrev
       <OnThisDay memories={memories} />
 
       {/* Daily prompt card */}
-      <section className="px-5 py-4">
+      <section className="px-5 py-5">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-card shadow-card rounded-2xl p-5 relative overflow-hidden"
+          className="bg-card shadow-card rounded-3xl p-6 relative overflow-hidden"
         >
           <div className="tape -top-1 right-10" style={{ transform: 'rotate(2deg)' }} />
-          <p className="mono text-xs text-mute uppercase tracking-widest mb-2">Question of the day</p>
-          <p className="serif-i text-xl text-ink leading-snug mb-4">"{todayPrompt}"</p>
+          <p className="mono text-sm text-mute uppercase tracking-widest mb-3">Question of the day</p>
+          <p className="serif-i text-2xl text-ink leading-snug mb-5">"{todayPrompt}"</p>
           <Link href="/diary"
-            className="inline-block px-4 py-2 rounded-full bg-cream-deep text-ink-soft text-sm hover:bg-accent hover:text-white transition-colors">
+            className="inline-block px-5 py-3 rounded-full bg-cream-deep text-ink-soft text-base font-medium hover:bg-accent hover:text-white transition-colors">
             Answer in diary →
           </Link>
         </motion.div>
       </section>
 
       {/* Recent memories feed */}
-      <section className="px-5 py-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="serif text-xl text-ink">Recent memories</h2>
-          <Link href="/memories" className="mono text-xs text-mute hover:text-accent transition-colors">see all →</Link>
+      <section className="px-5 py-5">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="serif text-2xl text-ink">Recent memories</h2>
+          <Link href="/memories" className="mono text-sm text-mute hover:text-accent transition-colors">see all →</Link>
         </div>
         {latest.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-5">
             {latest.map((mem, i) => (
               <motion.div
                 key={mem.id}
@@ -98,18 +98,18 @@ export default function Home({ memories, diaryCount, bucketPreview, timelinePrev
             ))}
           </div>
         ) : (
-          <div className="bg-card rounded-2xl p-8 text-center shadow-soft">
-            <p className="serif-i text-lg text-mute mb-3">No memories yet…</p>
+          <div className="bg-card rounded-3xl p-10 text-center shadow-soft">
+            <p className="serif-i text-xl text-mute mb-4">No memories yet…</p>
             <Link href="/memories/new"
-              className="inline-block px-5 py-2.5 rounded-full bg-accent text-white text-sm">
+              className="inline-block px-6 py-3 rounded-full bg-accent text-white text-base">
               Add your first memory
             </Link>
           </div>
         )}
         {latest.length > 0 && (
-          <div className="text-center mt-5">
+          <div className="text-center mt-6">
             <Link href="/memories/new"
-              className="inline-block px-6 py-2.5 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors">
+              className="inline-block px-8 py-3 rounded-full bg-accent text-white text-base font-medium hover:bg-accent/90 transition-colors">
               + Add memory
             </Link>
           </div>
@@ -118,13 +118,13 @@ export default function Home({ memories, diaryCount, bucketPreview, timelinePrev
 
       {/* Timeline preview */}
       {timelinePreview.length > 0 && (
-        <section className="px-5 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="serif text-xl text-ink">Milestones</h2>
-            <Link href="/timeline" className="mono text-xs text-mute hover:text-accent transition-colors">see all →</Link>
+        <section className="px-5 py-5">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="serif text-2xl text-ink">Milestones</h2>
+            <Link href="/timeline" className="mono text-sm text-mute hover:text-accent transition-colors">see all →</Link>
           </div>
-          <div className="bg-card rounded-2xl shadow-soft p-4">
-            <div className="border-l-2 border-line pl-4 space-y-4">
+          <div className="bg-card rounded-3xl shadow-soft p-5">
+            <div className="border-l-2 border-line pl-5 space-y-5">
               {timelinePreview.map((event, idx) => (
                 <TimelineItem key={event.id} event={event} isLast={idx === timelinePreview.length - 1} />
               ))}
@@ -135,12 +135,12 @@ export default function Home({ memories, diaryCount, bucketPreview, timelinePrev
 
       {/* Bucket list preview */}
       {bucketPreview.length > 0 && (
-        <section className="px-5 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="serif text-xl text-ink">Things we'll do</h2>
-            <Link href="/bucket-list" className="mono text-xs text-mute hover:text-accent transition-colors">see all →</Link>
+        <section className="px-5 py-5">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="serif text-2xl text-ink">Things we'll do</h2>
+            <Link href="/bucket-list" className="mono text-sm text-mute hover:text-accent transition-colors">see all →</Link>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-4">
             {bucketPreview.map((item) => (
               <BucketListCard key={item.id} item={item} onToggle={() => {}} />
             ))}
@@ -149,18 +149,18 @@ export default function Home({ memories, diaryCount, bucketPreview, timelinePrev
       )}
 
       {/* Stats summary */}
-      <section className="px-5 py-4 pb-8">
-        <div className="bg-card rounded-2xl shadow-soft p-5">
-          <h2 className="serif text-xl text-ink mb-4">Our story so far</h2>
-          <div className="grid grid-cols-3 gap-3">
+      <section className="px-5 py-5 pb-12">
+        <div className="bg-card rounded-3xl shadow-soft p-6">
+          <h2 className="serif text-2xl text-ink mb-5">Our story so far</h2>
+          <div className="grid grid-cols-3 gap-4">
             {[
               { v: memories.length, l: 'memories' },
               { v: diaryCount, l: 'diary notes' },
               { v: memories.filter((m) => m.favourite).length, l: 'favourites' },
             ].map(({ v, l }) => (
               <div key={l} className="text-center">
-                <p className="text-2xl font-semibold text-accent">{v}</p>
-                <p className="mono text-xs text-mute mt-0.5">{l}</p>
+                <p className="text-3xl font-semibold text-accent">{v}</p>
+                <p className="mono text-sm text-mute mt-1">{l}</p>
               </div>
             ))}
           </div>

@@ -24,8 +24,8 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-cream border-b border-line">
-      <div className="container flex items-center justify-between h-14">
-        <Link href="/" className="serif-i text-2xl text-ink tracking-tight leading-none">
+      <div className="container flex items-center justify-between h-16">
+        <Link href="/" className="serif-i text-3xl text-ink tracking-tight leading-none">
           only us.
         </Link>
         <div className="hidden md:flex items-center gap-5">
